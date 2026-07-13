@@ -1,0 +1,248 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "faradaysec"
+dynamic = ["version"]
+description = "Open Source Collaborative Penetration Test and Vulnerability Management Platform"
+readme = "README.md"
+readme-content-type = "text/markdown"
+requires-python = ">=3.7,<4"
+authors = [
+    {name = "Faradaysec", email = "devel@faradaysec.com"}
+]
+maintainers = [
+    {name = "Infobyte", email = "devel@faradaysec.com"}
+]
+license = {text = "GPLv3"}
+keywords = [
+    "security",
+    "vulnerability-management",
+    "penetration-testing",
+    "collaboration",
+    "bug-tracking",
+    "qa"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+    "Topic :: Software Development :: Bug Tracking",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: System :: Networking :: Monitoring",
+    "Natural Language :: English",
+]
+
+dependencies = [
+    "PyJWT>=2.3.0",
+    "werkzeug>=1.0.0,<2.1.0",
+    "autobahn>=22.7.1",
+    "alembic>=0.9.9",
+    "bcrypt<5.0.0",
+    "colorama>=0.3.9",
+    "click>=8.0.1",
+    "flask>=1.1,<=2.1.3",
+    "Flask-SQLAlchemy>=2.3.1,<=2.5.1",
+    "flask-classful>=0.14,<0.16",
+    "email_validator",
+    "validators",
+    "Flask-WTF>=0.15.1,<=1.0.1",
+    "WTForms>=2.1",
+    "flask-login>=0.5.0,<0.6.0",
+    "Flask-Security-Too>=4.0.0,<5.0.0",
+    "bleach>=4.1.0,<5.0.0",
+    "marshmallow>=3.19.0,<4.0.0",
+    "Pillow>=10.2.0",
+    "psycopg2",
+    "pgcli",
+    "cryptography>=40.0.1",
+    "pyopenssl>=23.1.1",
+    "python-dateutil>=2.6.0",
+    "requests>=2.18.4",
+    "pyasn1",
+    "service_identity>=17.0.0",
+    "SQLAlchemy>=1.2.0,<1.4.0",
+    "tqdm>=4.15.0",
+    "webargs>=7.0.0",
+    "marshmallow-sqlalchemy>=0.26.1,<0.28.1",
+    "filteralchemy-fork",
+    "filedepot>=0.5.0,<0.11.0",
+    "nplusone>=0.8.1",
+    "syslog-rfc5424-formatter>=1.1.1",
+    "simplekv>=0.13.0",
+    "Flask-KVSession-fork>=0.6.4",
+    "distro>=1.4.0",
+    "faraday-plugins>=1.27.1,<2.0.0",
+    "apispec>=6.3.0",
+    "apispec-webframeworks<=0.5.2",
+    "pyyaml",
+    "bidict==0.22.0",
+    "Flask-SocketIO>=5.0.1",
+    "pyotp>=2.6.0",
+    "Flask-Limiter>=1.3.1,<1.4.0",
+    "Flask-Mail",
+    "faraday-agent-parameters-types>=1.9.1",
+    "cvss>=3.1",
+    "celery==5.4.0",
+    "kombu==5.4.2",
+    "gevent>=22.10.2",
+    "psycogreen>=1.0.2",
+    "Flask-Celery-Helper>=1.1.0",
+    "redis>=4.3.4",
+    "gevent-websocket>=0.10.1",
+    "sh",
+    "elasticsearch>=7.16.3",
+    "croniter>=0.3.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "factory-boy>=2.10.0",
+    "pylint",
+    "pytest>=6",
+    "pytest-cov",
+    "pytest-factoryboy>=2.0.1,<2.5.0",
+    "responses>=0.9.0",
+    "hypothesis>=4.18.3",
+    "Sphinx>=1.7.6",
+    "twine",
+    "pytest-xdist",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "flake8>=4.0.0",
+]
+test = [
+    "pytest>=6",
+    "pytest-cov",
+    "pytest-factoryboy>=2.0.1,<2.5.0",
+    "pytest-xdist",
+    "responses>=0.9.0",
+    "hypothesis>=4.18.3",
+]
+docs = [
+    "Sphinx>=1.7.6",
+    "sphinx-rtd-theme>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://www.faradaysec.com"
+Documentation = "https://docs.faradaysec.com"
+Repository = "https://github.com/infobyte/faraday"
+"Issue Tracker" = "https://github.com/infobyte/faraday/issues"
+"Source Code" = "https://github.com/infobyte/faraday"
+"Release Notes" = "https://github.com/infobyte/faraday/releases"
+Changelog = "https://github.com/infobyte/faraday/blob/master/RELEASE.md"
+
+[project.scripts]
+faraday-server = "faraday.start_server:main"
+faraday-manage = "faraday.manage:cli"
+faraday-worker = "faraday.server.celery_worker:main"
+faraday-worker-gevent = "faraday.server.celery_worker_gevent:main"
+faraday-start-all = "faraday.start_all:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["faraday*"]
+
+[tool.setuptools.package-data]
+faraday = ["requirements.txt"]
+
+[tool.setuptools.dynamic]
+version = {attr = "faraday.__version__"}
+
+# Development tools configuration
+
+[tool.black]
+line-length = 120
+target-version = ["py37", "py38", "py39"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_mode = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip_glob = ["*/migrations/*", "*/venv/*"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-ra -q --strict-markers"
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks tests as integration",
+    "unit: marks tests as unit",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["faraday"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__main__.py",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pylint.messages_control]
+disable = [
+    "C0330", "C0326",  # Bad whitespace
+    "R0903",           # Too few public methods
+    "R0913",           # Too many arguments
+    "W0212",           # Protected access
+]
+
+[tool.pylint.format]
+max-line-length = 120
